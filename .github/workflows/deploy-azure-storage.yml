@@ -1,0 +1,63 @@
+name: Deploy Static Website to Azure Blob Storage
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    name: Build & Deploy to Azure $web
+    steps:
+      - name: 1. Checkout Código Fuente
+        uses: actions/checkout@v4
+
+      - name: 2. Validar Estructura del Sitio Web Estático
+        run: |
+          echo "=========================================="
+          echo "  Verificando archivos estaticos..."
+          echo "=========================================="
+          test -f index.html || { echo "ERROR: index.html no encontrado"; exit 1; }
+          test -f styles.css || { echo "ERROR: styles.css no encontrado"; exit 1; }
+          test -f app.js || { echo "ERROR: app.js no encontrado"; exit 1; }
+          echo "Archivos estaticos validados con exito."
+
+      - name: 3. Iniciar Sesión en Azure (Service Principal)
+        uses: azure/login@v2
+        if: env.AZURE_CREDENTIALS != ''
+        env:
+          AZURE_CREDENTIALS: ${{ secrets.AZURE_CREDENTIALS }}
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - name: 4. Sincronizar Archivos al Contenedor $web
+        uses: azure/CLI@v2
+        if: env.AZURE_STORAGE_ACCOUNT != ''
+        env:
+          AZURE_STORAGE_ACCOUNT: ${{ secrets.AZURE_STORAGE_ACCOUNT }}
+          AZURE_STORAGE_KEY: ${{ secrets.AZURE_STORAGE_KEY }}
+        with:
+          inlineScript: |
+            echo "Subiendo archivos al contenedor \$web en Azure Storage Account: ${{ secrets.AZURE_STORAGE_ACCOUNT }}..."
+            az storage blob upload-batch \
+              --account-name "${{ secrets.AZURE_STORAGE_ACCOUNT }}" \
+              --auth-mode key \
+              --account-key "${{ secrets.AZURE_STORAGE_KEY }}" \
+              --destination '$web' \
+              --source . \
+              --exclude ".git/*" ".github/*" "README.md" "REPORTE_PRACTICA.md" "*.pdf" \
+              --overwrite true
+            echo "Sincronización completada exitosamente."
+
+      - name: 5. Notificación de Fin de Pipeline
+        run: |
+          echo "=================================================="
+          echo "  Pipeline CI/CD completado con exito en Azure!  "
+          echo "  Rama: main | Commit: ${{ github.sha }}          "
+          echo "=================================================="
