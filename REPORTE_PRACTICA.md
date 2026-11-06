@@ -94,3 +94,4 @@ Se realizó un cambio visible en la interfaz local del proyecto (en `index.html`
 ## 8. Conclusiones
 
 La implementación de sitios web estáticos en la nube mediante servicios PaaS/Serverless como Azure Blob Storage y Azure Static Web Apps, combinados con pipelines de CI/CD en GitHub Actions, demuestra ser la estrategia idónea para arquitecturas modernas. Garantiza alta disponibilidad, seguridad robusta por ausencia de superficies vulnerables de servidor tradicional, y una reducción drástica de costos operativos y financieros.
+

@@ -61,3 +61,4 @@ jobs:
           echo "  Pipeline CI/CD completado con exito en Azure!  "
           echo "  Rama: main | Commit: ${{ github.sha }}          "
           echo "=================================================="
+
