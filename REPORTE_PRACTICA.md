@@ -27,7 +27,7 @@
   [https://github.com/gr220112948-coder/Practica-Nube-Estatico](https://github.com/gr220112948-coder/Practica-Nube-Estatico)
 
 - **URL Pública Funcional en Microsoft Azure:**  
-  *Coloca aquí tu URL pública generada por Azure (por ejemplo: `https://sawebestatico...z22.web.core.windows.net/` o `https://lemon-sky-...azurestaticapps.net`)*
+  [https://jolly-river-08941b010.4.azurestaticapps.net](https://jolly-river-08941b010.4.azurestaticapps.net)
 
 ---
 
@@ -62,7 +62,7 @@
 
 ## 5. Automatización CI/CD (Pipeline)
 
-El archivo `.github/workflows/deploy-azure-storage.yml` y/o `.github/workflows/azure-static-web-apps.yml` automatiza la entrega con las siguientes tareas:
+El archivo `.github/workflows/azure-static-web-apps-jolly-river-08941b010.yml` automatiza la entrega con las siguientes tareas:
 1. `checkout`: Descarga el código fuente del commit activado.
 2. `validación`: Inspecciona la existencia de los artefactos estáticos (`index.html`, `styles.css`, `app.js`).
 3. `autenticación`: Conexión cifrada a Azure mediante `secrets.AZURE_CREDENTIALS` o token de implementación.

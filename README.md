@@ -8,6 +8,13 @@
 
 ---
 
+## 🌐 URL Pública en Producción
+
+- **Sitio Desplegado:** [https://jolly-river-08941b010.4.azurestaticapps.net](https://jolly-river-08941b010.4.azurestaticapps.net)
+- **Repositorio:** [https://github.com/gr220112948-coder/Practica-Nube-Estatico](https://github.com/gr220112948-coder/Practica-Nube-Estatico)
+
+---
+
 ## 📋 Descripción del Proyecto
 
 Este repositorio contiene la solución completa para la **Práctica 2: Sitio Web Estático en Azure**. El proyecto implementa una arquitectura desacoplada y *serverless* que aloja una aplicación web estática de alto rendimiento en la nube de Microsoft Azure, completamente automatizada mediante un pipeline de Integración y Despliegue Continuo (CI/CD) con **GitHub Actions**.
